@@ -24,20 +24,6 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
-    
-    @Autowired
-    private CustomUserDetailsService service;
-    
-    
-    @PostMapping("/register")
-    public User createOne(@RequestBody User request) {
-    	try {    		
-    		return service.createUser(request);
-    	}
-    	catch (RuntimeException e) {
-    		throw new RuntimeException("error: " + e);
-		}
-    }
 
     @PostMapping(value = "/login", produces = "application/json")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
@@ -51,10 +37,5 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(request.getUsername());
         return ResponseEntity.ok(new LoginResponse(token));
-    }
-    
-    @GetMapping("/test")
-    public String test() {
-    	return "Test thanh cong";
     }
 }
