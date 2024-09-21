@@ -28,12 +28,12 @@ public class RoomService {
     private final String uploadDir = "uploads/";
 
     public ResponseListDto<RoomDto> getAll(int limit, int page, String orderBy, boolean descending) {
-        Sort sort = Sort.by(orderBy);
-        if (descending) {
-            sort = sort.descending();
-        } else {
-            sort = sort.ascending();
-        }
+		Sort sort;
+	    if (descending) {
+	        sort = Sort.by(Sort.Order.desc(orderBy));
+	    } else {
+	        sort = Sort.by(Sort.Order.asc(orderBy));
+	    }
 
         Pageable pageable = PageRequest.of(page - 1, limit, sort);
         Page<Room> roomPage = roomRepository.findAll(pageable);
@@ -51,12 +51,12 @@ public class RoomService {
     }
 
     public ResponseListDto<RoomDto> getByType(Long id, int limit, int page, String orderBy, boolean descending) {
-        Sort sort = Sort.by(orderBy);
-        if (descending) {
-            sort = sort.descending();
-        } else {
-            sort = sort.ascending();
-        }
+		Sort sort;
+	    if (descending) {
+	        sort = Sort.by(Sort.Order.desc(orderBy));
+	    } else {
+	        sort = Sort.by(Sort.Order.asc(orderBy));
+	    }
 
         Pageable pageable = PageRequest.of(page - 1, limit, sort);
         Page<Room> roomPage = roomRepository.findByRoomTypeId(id, pageable);
@@ -77,7 +77,7 @@ public class RoomService {
     }
 
     public RoomDto updateRoom(Long id, Room roomUpdates) {
-        Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
+        Room room = roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
         room.setName(roomUpdates.getName());
         room.setPrice(roomUpdates.getPrice());
         room.setMax(roomUpdates.getMax());

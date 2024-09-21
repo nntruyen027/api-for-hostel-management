@@ -18,9 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration  // Thêm annotation này
+@Configuration
 @EnableWebSecurity
-@EnableMethodSecurity  // Nếu bạn muốn sử dụng @PreAuthorize, v.v.
+@EnableMethodSecurity  
 @RequiredArgsConstructor
 public class SecurityConfig {
 

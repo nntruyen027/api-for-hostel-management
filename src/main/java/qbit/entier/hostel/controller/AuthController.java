@@ -3,8 +3,10 @@ package qbit.entier.hostel.controller;
 import lombok.RequiredArgsConstructor;
 import qbit.entier.hostel.dto.LoginRequest;
 import qbit.entier.hostel.dto.LoginResponse;
+import qbit.entier.hostel.dto.UserDto;
 import qbit.entier.hostel.entity.User;
 import qbit.entier.hostel.service.CustomUserDetailsService;
+import qbit.entier.hostel.service.UserService;
 import qbit.entier.hostel.util.JwtUtil;
 
 import javax.management.RuntimeErrorException;
@@ -24,6 +26,14 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    
+    @Autowired
+    private UserService service;
+    
+    @GetMapping(value = "/info")
+    public UserDto getInfo() {
+    	return service.getUserInfo();
+    }
 
     @PostMapping(value = "/login", produces = "application/json")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
