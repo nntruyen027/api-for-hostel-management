@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
 import qbit.entier.hostel.entity.User;
 import qbit.entier.hostel.repository.UserRepository;
 
@@ -25,7 +26,7 @@ public class DataInitializer implements CommandLineRunner {
                     .role("ROLE_ADMIN")
                     .fullname("Super Admin")
                     .phone("000000000")
-                    .CID("123456789")
+                    .cid("123456789")
                     .build();
 
             userRepository.save(adminUser);

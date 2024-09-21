@@ -3,12 +3,6 @@ package qbit.entier.hostel.dto;
 import java.util.Date;
 import java.util.Optional;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,8 +31,11 @@ public class UserDto {
     private String address;
 
     private Date birthday;
+    
+    private String avatar;
 
     private Room room; 
+    
     
     public static UserDto toDto(User user) {
     	if(user == null)
@@ -46,29 +43,31 @@ public class UserDto {
     	return new UserDto().builder()
     			.address(user.getAddress())
     			.birthday(user.getBirthday())
-    			.CID(user.getCID())
+    			.CID(user.getCid())
     			.email(user.getEmail())
     			.fullname(user.getFullname())
     			.id(user.getId())
     			.phone(user.getPhone())
     			.role(user.getRole())
     			.room(user.getRoom())
+    			.avatar(user.getAvatar())
     			.build();
     }
-    
+   
     public static UserDto toDto(Optional<User> user) {
        	if(user == null)
     		return null;
     	return new UserDto().builder()
     			.address(user.get().getAddress())
     			.birthday(user.get().getBirthday())
-    			.CID(user.get().getCID())
+    			.CID(user.get().getCid())
     			.email(user.get().getEmail())
     			.fullname(user.get().getFullname())
     			.id(user.get().getId())
     			.phone(user.get().getPhone())
     			.role(user.get().getRole())
     			.room(user.get().getRoom())
+    			.avatar(user.get().getAvatar())
     			.build();
     }
 }

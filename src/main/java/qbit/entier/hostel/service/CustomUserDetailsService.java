@@ -1,11 +1,10 @@
 package qbit.entier.hostel.service;
 
-import lombok.RequiredArgsConstructor;
-import qbit.entier.hostel.entity.User;
-import qbit.entier.hostel.repository.UserRepository;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,10 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import qbit.entier.hostel.entity.User;
+import qbit.entier.hostel.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
