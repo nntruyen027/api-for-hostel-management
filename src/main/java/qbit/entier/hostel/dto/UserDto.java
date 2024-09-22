@@ -34,7 +34,6 @@ public class UserDto {
     
     private String avatar;
 
-    private Room room; 
     
     
     public static UserDto toDto(User user) {
@@ -49,7 +48,6 @@ public class UserDto {
     			.id(user.getId())
     			.phone(user.getPhone())
     			.role(user.getRole())
-    			.room(user.getRoom())
     			.avatar(user.getAvatar())
     			.build();
     }
@@ -66,7 +64,6 @@ public class UserDto {
     			.id(user.get().getId())
     			.phone(user.get().getPhone())
     			.role(user.get().getRole())
-    			.room(user.get().getRoom())
     			.avatar(user.get().getAvatar())
     			.build();
     }

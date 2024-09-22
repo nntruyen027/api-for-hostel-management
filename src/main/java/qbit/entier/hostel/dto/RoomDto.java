@@ -22,6 +22,8 @@ public class RoomDto {
 	
 	private List<RoomImageDto> images;
 	
+	private List<UserDto> customers;
+	
 	public static RoomDto toDto(Room room) {
         if (room == null) {
             return null;
@@ -34,8 +36,11 @@ public class RoomDto {
             RoomTypeDto.toDto(room.getRoomType()),
             room.getImages().stream()
                 .map(RoomImageDto::toDto)
-                .collect(Collectors.toList())
-        );
+                .collect(Collectors.toList()),
+            room.getCustomer().stream()
+            	.map(UserDto::toDto)
+            	.collect(Collectors.toList())
+            );
     }
 	
 	public static RoomDto toDto(Optional<Room> room) {
@@ -50,7 +55,10 @@ public class RoomDto {
             RoomTypeDto.toDto(room.get().getRoomType()),
             room.get().getImages().stream()
                 .map(RoomImageDto::toDto)
-                .collect(Collectors.toList())
+                .collect(Collectors.toList()),
+            room.get().getCustomer().stream()
+            	.map(UserDto::toDto)
+            	.collect(Collectors.toList())
         );
     }
 }

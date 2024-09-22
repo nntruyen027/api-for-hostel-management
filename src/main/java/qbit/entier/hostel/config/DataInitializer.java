@@ -53,8 +53,6 @@ public class DataInitializer implements CommandLineRunner {
                 System.out.println("Failed to create uploads directory.");
                 e.printStackTrace();
             }
-        } else {
-            System.out.println("Uploads directory already exists.");
         }
     }
 }
