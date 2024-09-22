@@ -60,9 +60,9 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-            	.requestMatchers("/auth/test").authenticated()
             	.requestMatchers("/auth/*").permitAll() 
             	.requestMatchers("/error").permitAll()
+            	.requestMatchers("/uploads/**").permitAll()  
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session

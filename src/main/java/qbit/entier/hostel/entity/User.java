@@ -61,4 +61,36 @@ public class User {
     @JoinColumn(name = "room_id")
     private Room room;
     
+    public void updateNonNullFields(User updatedUser) {
+        if (updatedUser.getUsername() != null) {
+            this.setUsername(updatedUser.getUsername());
+        }
+        if (updatedUser.getPassword() != null) {
+            this.setPassword(updatedUser.getPassword());
+        }
+        if (updatedUser.getRole() != null) {
+            this.setRole(updatedUser.getRole());
+        }
+        if (updatedUser.getFullname() != null) {
+            this.setFullname(updatedUser.getFullname());
+        }
+        if (updatedUser.getPhone() != null) {
+            this.setPhone(updatedUser.getPhone());
+        }
+        if (updatedUser.getEmail() != null) {
+            this.setEmail(updatedUser.getEmail());
+        }
+        if (updatedUser.getAddress() != null) {
+            this.setAddress(updatedUser.getAddress());
+        }
+        if (updatedUser.getBirthday() != null) {
+            this.setBirthday(updatedUser.getBirthday());
+        }
+        if (updatedUser.getAvatar() != null) {
+            this.setAvatar(updatedUser.getAvatar());
+        }
+        if (updatedUser.getRoom() != null) {
+            this.setRoom(updatedUser.getRoom());
+        }
+    }
 }

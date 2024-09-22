@@ -122,13 +122,10 @@ public class RoomService {
                 String fileName = image.getOriginalFilename();
                 File dest = new File(uploadDir + fileName);
                 try {
-                    // Lưu file vào thư mục
                     image.transferTo(dest);
-                    // Lưu đường dẫn file vào RoomImage
                     RoomImage roomImage = new RoomImage();
                     roomImage.setRoom(room);
-                    roomImage.setImage(uploadDir + fileName); // Lưu đường dẫn
-                    // Lưu vào database
+                    roomImage.setImage(uploadDir + fileName); 
                     roomImageRepository.save(roomImage);
                 } catch (IOException e) {
                     e.printStackTrace();

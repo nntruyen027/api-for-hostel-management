@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import qbit.entier.hostel.dto.ChangePasswordRequest;
 import qbit.entier.hostel.dto.ResponseListDto;
 import qbit.entier.hostel.dto.ResponseListDto.Meta;
 import qbit.entier.hostel.dto.UserDto;
@@ -24,8 +25,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -46,6 +45,54 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         return UserDto.toDto(user);
+    }
+    
+    public UserDto updateUserInfo(User updatedUser) {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        String username;
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        user.updateNonNullFields(updatedUser);
+        return UserDto.toDto(userRepository.save(user));
+        	
+    }
+    
+    public boolean changePassword(ChangePasswordRequest changePasswordRequest) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+
+        String username;
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!passwordEncoder.matches(changePasswordRequest.getOldPassword(), user.getPassword())) {
+            throw new RuntimeException("Current password is incorrect");
+        }
+
+        if (!changePasswordRequest.getNewPassword().equals(changePasswordRequest.getConfirmPassword())) {
+            throw new RuntimeException("New password and confirm password do not match");
+        }
+        
+        user.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()));
+        userRepository.save(user);
+        return true;
     }
 
     public ResponseListDto<UserDto> getAll(int limit, int page, String orderBy, boolean descending) {
