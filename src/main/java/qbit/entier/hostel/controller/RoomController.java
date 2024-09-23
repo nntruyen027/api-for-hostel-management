@@ -29,7 +29,6 @@ public class RoomController {
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "name", required = false) String orderBy,
             @RequestParam(defaultValue = "false", required = false) boolean descending) {
-    	System.out.println("hello");
         ResponseListDto<RoomDto> rooms = roomService.getAll(limit, page, orderBy, descending);
         return ResponseEntity.ok(rooms);
     }
@@ -60,7 +59,7 @@ public class RoomController {
         return ResponseEntity.ok(updatedRoom);
     }
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{newRoomId}/users/{userId}/transfer")
+    @PutMapping("/{newRoomId}/users/{userId}")
     public ResponseEntity<RoomDto> transferUserToRoom(@PathVariable Long userId, @PathVariable Long newRoomId) {
         RoomDto updatedRoom = roomService.transferUserToRoom(userId, newRoomId);
         return ResponseEntity.ok(updatedRoom);

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,7 +14,8 @@ public class FileUtil {
     private static final String UPLOAD_DIR = "uploads/";
     
 	public static String saveFile(MultipartFile file) throws IOException {
-		String fileName = file.getOriginalFilename();
+		Date current = new Date();
+		String fileName = current.getTime() + file.getOriginalFilename();
         Path filePath = Paths.get(UPLOAD_DIR + fileName);
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 

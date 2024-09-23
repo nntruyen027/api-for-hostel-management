@@ -107,7 +107,6 @@ public class UserService {
     }
 
     public UserDto createUser(User user) {
-    	System.out.println(user);
     	
         User newUser = User.builder()
                 .username(user.getUsername())
@@ -140,7 +139,7 @@ public class UserService {
     }
 
     public UserDto getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Not fount"));
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
         return UserDto.toDto(user);
     }
 }

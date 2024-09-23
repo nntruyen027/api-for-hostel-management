@@ -24,7 +24,7 @@ public class UserDto {
 
     private String phone;
  
-    private String CID;
+    private String cid;
 
     private String email;
 
@@ -35,14 +35,13 @@ public class UserDto {
     private String avatar;
 
     
-    
     public static UserDto toDto(User user) {
     	if(user == null)
     		return null;
     	return new UserDto().builder()
     			.address(user.getAddress())
     			.birthday(user.getBirthday())
-    			.CID(user.getCid())
+    			.cid(user.getCid())
     			.email(user.getEmail())
     			.fullname(user.getFullname())
     			.id(user.getId())
@@ -58,7 +57,7 @@ public class UserDto {
     	return new UserDto().builder()
     			.address(user.get().getAddress())
     			.birthday(user.get().getBirthday())
-    			.CID(user.get().getCid())
+    			.cid(user.get().getCid())
     			.email(user.get().getEmail())
     			.fullname(user.get().getFullname())
     			.id(user.get().getId())
