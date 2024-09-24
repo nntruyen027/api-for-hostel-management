@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestRoomUtilityDto {
-	private Long id;
 	private Long room;
-	private Long expenseCategory;
+	private Long service;
 }

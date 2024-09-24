@@ -5,20 +5,19 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
-import org.springframework.stereotype.Service;
 
 import qbit.entier.hostel.dto.RequestRoomUtilityDto;
 import qbit.entier.hostel.dto.ResponseListDto;
 import qbit.entier.hostel.dto.ResponseListDto.Meta;
 import qbit.entier.hostel.dto.RoomUtilityDto;
-import qbit.entier.hostel.entity.ExpenseCategory;
+import qbit.entier.hostel.entity.Service;
 import qbit.entier.hostel.entity.Room;
 import qbit.entier.hostel.entity.RoomUtility;
-import qbit.entier.hostel.repository.ExpenseCategoryRepository;
+import qbit.entier.hostel.repository.ServiceRepository;
 import qbit.entier.hostel.repository.RoomRepository;
 import qbit.entier.hostel.repository.RoomUtilityRepository;
 
-@Service
+@org.springframework.stereotype.Service
 public class RoomUtilityService {
 	@Autowired
 	RoomUtilityRepository repository;
@@ -27,7 +26,7 @@ public class RoomUtilityService {
 	RoomRepository roomRep;
 	
 	@Autowired
-	ExpenseCategoryRepository categoryRep;
+	ServiceRepository categoryRep;
 	
 	public ResponseListDto<RoomUtilityDto> getAll(int limit, int page, String orderBy, boolean descending) {
 		Sort sort;
@@ -67,13 +66,13 @@ public class RoomUtilityService {
 		return res;
 	}
 	
-	public ResponseListDto<RoomUtilityDto> findByCategory(Long category ,int limit, int page, String orderBy, boolean descending) {
+	public ResponseListDto<RoomUtilityDto> findByCategory(Long service ,int limit, int page, String orderBy, boolean descending) {
 		Sort sort;
 		if(descending)
 			sort = Sort.by(Sort.Order.desc(orderBy));
 		else
 			sort = Sort.by(Sort.Order.asc(orderBy));
-		Page<RoomUtility> resPage = repository.findByExpenseCategoryId(category, PageRequest.of(page, limit, sort));
+		Page<RoomUtility> resPage = repository.findByServiceId(service, PageRequest.of(page, limit, sort));
 		List<RoomUtilityDto> dtos = resPage.getContent().stream().map(RoomUtilityDto::toDto).collect(Collectors.toList());
 		ResponseListDto<RoomUtilityDto> res = new ResponseListDto<>();
 		res.setData(dtos);
@@ -92,10 +91,10 @@ public class RoomUtilityService {
 	
 	public RoomUtilityDto createOne(RequestRoomUtilityDto newObject) {
 		Room room = roomRep.findById(newObject.getRoom()).orElseThrow(() -> new RuntimeException("Not found room"));
-		ExpenseCategory category = categoryRep.findById(newObject.getExpenseCategory()).orElseThrow(() -> new RuntimeException("Not found category"));
+		Service category = categoryRep.findById(newObject.getService()).orElseThrow(() -> new RuntimeException("Not found category"));
 		
 		RoomUtility object = RoomUtility.builder()
-				.expenseCategory(category)
+				.service(category)
 				.room(room)
 				.build();
 		
@@ -105,8 +104,8 @@ public class RoomUtilityService {
 	public RoomUtilityDto updateOne(Long id, RequestRoomUtilityDto updatedObject) {
 		RoomUtility object = repository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
 		Room room = roomRep.findById(updatedObject.getRoom()).orElseThrow(() -> new RuntimeException("Not found room"));
-		ExpenseCategory category = categoryRep.findById(updatedObject.getExpenseCategory()).orElseThrow(() -> new RuntimeException("Not found category"));
-		object.setExpenseCategory(category);
+		Service service = categoryRep.findById(updatedObject.getService()).orElseThrow(() -> new RuntimeException("Not found category"));
+		object.setService(service);
 		object.setRoom(room);
 		return RoomUtilityDto.toDto(repository.save(object));
 	}

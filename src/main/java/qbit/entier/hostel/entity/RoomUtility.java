@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +18,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(uniqueConstraints = {
+		
+	@UniqueConstraint(columnNames = {"room_id", "service_id"})
+})
 public class RoomUtility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +32,6 @@ public class RoomUtility {
     private Room room; 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "expense_category_id", nullable = false)
-    private ExpenseCategory expenseCategory;
+    @JoinColumn(name = "service_id", nullable = false)
+    private Service service;
 }

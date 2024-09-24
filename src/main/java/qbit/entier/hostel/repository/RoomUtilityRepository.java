@@ -8,5 +8,5 @@ import qbit.entier.hostel.entity.RoomUtility;
 
 public interface RoomUtilityRepository extends JpaRepository<RoomUtility, Long> {
 	Page<RoomUtility> findByRoomId(Long id, Pageable pageable);
-	Page<RoomUtility> findByExpenseCategoryId(Long id, Pageable pageable);
+	Page<RoomUtility> findByServiceId(Long id, Pageable pageable);
 }

@@ -31,7 +31,7 @@ public class RoomServiceUsage {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "expense_category_id", nullable = false)
-    private ExpenseCategory expenseCategory;  
+    private Service expenseCategory;  
 
     private BigDecimal cost;  
 

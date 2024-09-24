@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import qbit.entier.hostel.dto.ExpenseCategoryDto;
+import qbit.entier.hostel.dto.ServiceDto;
 import qbit.entier.hostel.dto.ResponseListDto;
-import qbit.entier.hostel.entity.ExpenseCategory;
-import qbit.entier.hostel.service.ExpenseCategoryService;
+import qbit.entier.hostel.entity.Service;
+import qbit.entier.hostel.service.ServiceService;
 
 @RestController
-@RequestMapping("/expense-category")
+@RequestMapping("/services")
 @RequiredArgsConstructor
-public class ExpenseCategoryController {
+public class ServiceController {
 	
 	@Autowired
-	ExpenseCategoryService service;
+	ServiceService service;
 	
 	@GetMapping
-	ResponseEntity<ResponseListDto<ExpenseCategoryDto>> getAll(
+	ResponseEntity<ResponseListDto<ServiceDto>> getAll(
 			 	@RequestParam(defaultValue = "10", required = false) int limit,
 	            @RequestParam(defaultValue = "1", required = false) int page,
 	            @RequestParam(defaultValue = "name", required = false) String orderBy,
@@ -37,17 +37,17 @@ public class ExpenseCategoryController {
 	}
 	
 	@GetMapping("/{id}")
-	ResponseEntity<ExpenseCategoryDto> getOne(@PathVariable Long id) {
+	ResponseEntity<ServiceDto> getOne(@PathVariable Long id) {
 		return ResponseEntity.ok(service.getOne(id));
 	}
 	
 	@PostMapping
-	ResponseEntity<ExpenseCategoryDto> createOne(@RequestBody ExpenseCategory body) {
+	ResponseEntity<ServiceDto> createOne(@RequestBody Service body) {
 		return ResponseEntity.ok(service.createOne(body));
 	}
 	
 	@PutMapping("/{id}") 
-	ResponseEntity<ExpenseCategoryDto> updateOne(@PathVariable Long id, @RequestBody ExpenseCategory body) {
+	ResponseEntity<ServiceDto> updateOne(@PathVariable Long id, @RequestBody Service body) {
 		return ResponseEntity.ok(service.updateOne(id, body));
 	}
 	

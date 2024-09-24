@@ -15,13 +15,13 @@ import qbit.entier.hostel.entity.RoomUtility;
 public class RoomUtilityDto {
 	private Long id;
 	private RoomDto room;
-	private ExpenseCategoryDto expenseCategory;
+	private ServiceDto service;
 
 	public static RoomUtilityDto toDto(RoomUtility entity) {
 		return RoomUtilityDto.builder()
 				.id(entity.getId())
 				.room(RoomDto.toDto(entity.getRoom()))
-				.expenseCategory(ExpenseCategoryDto.toDto(entity.getExpenseCategory()))
+				.service(ServiceDto.toDto(entity.getService()))
 				.build();
 	}
 
