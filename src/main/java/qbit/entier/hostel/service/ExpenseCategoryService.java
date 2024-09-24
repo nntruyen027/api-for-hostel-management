@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import qbit.entier.hostel.dto.ExpenseCategoryDto;
@@ -41,6 +43,7 @@ public class ExpenseCategoryService {
 		ExpenseCategory newCategory = ExpenseCategory.builder()
 				.name(category.getName())
 				.description(category.getDescription())
+				.cost(category.getCost())
 				.build();
 		return ExpenseCategoryDto.toDto(repository.save(newCategory));
 	}
@@ -49,6 +52,7 @@ public class ExpenseCategoryService {
 		ExpenseCategory update = repository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
 		update.setName(category.getName());
 		update.setDescription(category.getDescription());
+		update.setCost(category.getCost());
 		return ExpenseCategoryDto.toDto(repository.save(update));
 	}
 	

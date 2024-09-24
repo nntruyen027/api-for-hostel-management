@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import qbit.entier.hostel.entity.Room;
 import qbit.entier.hostel.entity.User;
 
 @AllArgsConstructor
