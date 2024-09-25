@@ -38,5 +38,5 @@ public class Invoice {
     private BigDecimal totalCost;  
  
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
-    private List<RoomServiceUsage> services;     
+    private List<RoomServiceUsage> usages;     
 }
