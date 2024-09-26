@@ -36,10 +36,10 @@ public class RoomServiceUsage {
     @JoinColumn(name = "invoice_id", nullable = false) 
     private Invoice invoice;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int oldIndex;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int newIndex;
     
     @Column(nullable = false)
